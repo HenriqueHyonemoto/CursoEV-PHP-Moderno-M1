@@ -13,8 +13,8 @@ $salarioUsuario = $_GET["salarioUsuario"] ?? 1380.00;
 $salarioMinimo = 1380.00;
 
 
-$qtdVezes = intdiv($salarioUsuario, $salarioMinimo);
-$restante = $salarioUsuario % $salarioMinimo;
+$qtdVezes = floor($salarioUsuario/$salarioMinimo);
+$restante = $salarioUsuario-($salarioMinimo*$qtdVezes);
 
 $padrao = numfmt_create("pt_BR",NumberFormatter::CURRENCY);
 ?>
