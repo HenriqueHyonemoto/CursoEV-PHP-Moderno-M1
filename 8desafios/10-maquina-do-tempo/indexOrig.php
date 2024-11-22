@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="../../php-moderno-main/downloads/modelo-css/style.css">
 </head>
 <?php 
-$anoAtual = date("Y");
 $dataNasc = $_GET['dataNasc'] ?? 2000;
-$anoIdade = $_GET['anoIdade'] ?? $anoAtual;
+$anoIdade = $_GET['anoIdade'] ?? 2024;
 
 $idade = $anoIdade - $dataNasc;
 
@@ -21,7 +20,7 @@ $idade = $anoIdade - $dataNasc;
        <form action="<?=$_SERVER['PHP_SELF']?>" method="get">
         <label for="nota1">Em que ano você nasceu?</label>
         <input type="number" id="dataNasc" name="dataNasc" value="<?=$dataNasc?>" >
-        <label for="anoIdade">Quer saber sua idade em qual ano? (Atualmente estamos em <?=$anoAtual ?>)</label>
+        <label for="anoIdade">Quer saber sua idade em qual ano? (Atualmente estamos em 2024)</label>
         <input type="number" id="anoIdade" name="anoIdade" value="<?=$anoIdade?>">
         <input type="submit" value="Calcular Idade">
        </form>
