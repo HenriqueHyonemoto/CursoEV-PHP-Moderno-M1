@@ -17,9 +17,6 @@ $qtdVezes = floor($salarioUsuario/$salarioMinimo);
 $restante = $salarioUsuario-($salarioMinimo*$qtdVezes);
 
 $padrao = numfmt_create("pt_BR",NumberFormatter::CURRENCY);
-$salarioUsuario=numfmt_format_currency($padrao,$salarioUsuario,"BRL");
-$salarioMinimo=numfmt_format_currency($padrao,$salarioMinimo,"BRL");
-$restante=numfmt_format_currency($padrao,$restante,"BRL");
 ?>
 
 <body>
@@ -28,14 +25,14 @@ $restante=numfmt_format_currency($padrao,$restante,"BRL");
         <h1>Informe seu salário</h1>
         <form action="<?= $_SERVER['PHP_SELF'] ?>" method="get">
         <label for="salarioUsuario">Salário (R$)</label>
-        <input type="number" step=0.01 id="salarioUsuario" name="salarioUsuario">
-        <p>Considerando o salário minimo de <strong><?=$salarioMinimo?></strong></p>
+        <input type="number" step=0.01 id="salarioUsuario" name="salarioUsuario" value ="<?=$salarioUsuario?>">
+        <p>Considerando o salário minimo de <strong><?=numfmt_format_currency($padrao,$salarioMinimo,"BRL")?></strong></p>
         <input type="submit" value="Calcular">
         </form>
     </main>
     <section>
         <h1>Resultado Final</h1>
-        <p>Quem recebe um salário de <?= $salarioUsuario?> ganha <strong><?=$qtdVezes?> Salários minimos </strong>+ <?=$restante  ?> </p>
+        <p>Quem recebe um salário de <?= numfmt_format_currency($padrao,$salarioUsuario,"BRL");?> ganha <strong><?=$qtdVezes?> Salários minimos </strong>+ <?=numfmt_format_currency($padrao,$restante,"BRL")?> </p>
 
     </section>
 </body>
