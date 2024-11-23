@@ -8,24 +8,13 @@
     <link rel="stylesheet" href="../../php-moderno-main/downloads/modelo-css/style.css">
 </head>
 <?php
-$total = $_GET['total'] ?? 604800;
-$resto = $total;
+$segundosInput = $_GET['segundosInput'] ?? 604800;
 
-$semanas = (int)($resto/604800); //1 semana = 604.800 segundos
-$resto = $resto % 604800;
-
-$dias = (int)($resto/86400); //1 dia = 86.400 segundos
-$resto = $resto % 86400;
-
-$horas = (int)($resto/3600); //1 hora = 3.600 segundos
-$resto = $resto % 3600;
-
-$minutos = (int)($resto/60); //1 min = 60 segundos
-$resto = $resto % 60;
-
-$segundos = (int)($resto/1); //1 segundo = 1 segundo
-
-
+$semanas = floor($segundosInput/604800);
+$dias = floor(($segundosInput-$semanas*604800)/86400);
+$horas= floor(((($segundosInput-$semanas*604800)/86400)-$dias)*24);
+$minutos= floor(((((($segundosInput-$semanas*604800)/86400)-$dias)*24)-$horas)*60);
+$segundos= round(((((((($segundosInput-$semanas*604800)/86400)-$dias)*24)-$horas)*60)-$minutos)*60);
 
 ?>
 
@@ -34,14 +23,14 @@ $segundos = (int)($resto/1); //1 segundo = 1 segundo
         <h1>Calculadora de Tempo</h1>
 
         <form action="<?= $_SERVER['PHP_SELF'] ?>" method="get">
-            <label for="total">Qual é o total em Segundos?</label>
-            <input type="number" id="total" name="total" value="<?= $total ?>">
+            <label for="segundosInput">Qual é o total em Segundos?</label>
+            <input type="number" id="segundosInput" name="segundosInput" value="<?= $segundosInput ?>">
             <input type="submit" value="Calcular">
         </form>
     </main>
     <section>
         <h1>Totalizando tudo</h1>
-        <p>Analisando o balor que você digitou,<strong> <?= number_format($total,0,',','.')?> segundos</strong> equivalem a um total de:</p>
+        <p>Analisando o balor que você digitou,<strong><?= $segundosInput?> segundos</strong> equivalem a um total de:</p>
         <ul>
             <li><?=$semanas?> semanas</li>
             <li><?=$dias?> dias</li>
