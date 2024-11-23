@@ -9,19 +9,10 @@
 </head>
 <?php
 $saque = $_GET['saque'] ?? 0;
-$resto = $saque;
-
-    $qtd100 = floor($resto/100);
-    $resto %= 100; //$resto = $resto % 100;
-
-    $qtd50 = floor($resto/50);
-    $resto %= 50; //$resto = $resto % 50;
- 
-    $qtd10 = floor($resto/10);
-    $resto %= 10; //$resto = $resto % 10;
-
-    $qtd5 = floor($resto/5);
-    $resto %= 5; //$resto = $resto % 5;
+    $qtd100 = floor($saque/100);
+    $qtd50 = floor(($saque-$qtd100*100)/50);
+    $qtd10 = floor(((($saque-$qtd100*100)/50)-$qtd50)*5);
+    $qtd5 = ((((($saque-$qtd100*100)/50)-$qtd50)*5)-$qtd10)*2;
 
     $padrao = numfmt_create("pt_BR",NumberFormatter::CURRENCY);
 
